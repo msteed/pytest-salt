@@ -11,6 +11,8 @@ from external process to log them in the current process
 from __future__ import absolute_import, print_function, unicode_literals
 #import sys
 import logging
+from tblib import pickling_support
+pickling_support.install()
 
 # Import pytest libs
 import pytest
