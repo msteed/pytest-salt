@@ -15,10 +15,11 @@ import logging
 # Import pytest libs
 import pytest
 
-if sys.version_info > (3, 5):
-    from pytestsalt.utils.log_server_asyncio import log_server_asyncio as salt_log_server
-else:
-    from pytestsalt.utils.log_server_tornado import log_server_tornado as salt_log_server
+#if sys.version_info > (3, 5):
+#    from pytestsalt.utils.log_server_asyncio import log_server_asyncio as salt_log_server
+#else:
+#    from pytestsalt.utils.log_server_tornado import log_server_tornado as salt_log_server
+from pytestsalt.utils.log_server_tornado import log_server_tornado as salt_log_server
 
 from tblib import pickling_support
 pickling_support.install()
