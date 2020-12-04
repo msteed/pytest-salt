@@ -12,6 +12,7 @@ import os
 import socket
 import threading
 import logging
+import subprocess
 from multiprocessing import Queue
 
 # Import 3rd-party libs
@@ -19,6 +20,7 @@ import msgpack
 
 # Import Salt libs
 # pylint: disable=no-member,invalid-name
+from salt.log.setup import SaltLogQueueHandler, LOG_LEVELS
 try:
     import salt.utils.stringutils
     to_unicode = salt.utils.stringutils.to_unicode
@@ -53,7 +55,6 @@ def __virtual__():
 def setup_handlers():
     host_addr = __opts__.get('pytest_log_host')
     if not host_addr:
-        import subprocess
         if __opts__['pytest_windows_guest'] is True:
             proc = subprocess.Popen('ipconfig', stdout=subprocess.PIPE)
             for line in proc.stdout.read().strip().encode(__salt_system_encoding__).splitlines():
@@ -89,8 +90,6 @@ def setup_handlers():
         # can't process fast enough of in case it can't deliver the log records at all.
         queue_size = 10000000
 
-    # Late Imports Because of Salt's logging refactoring
-    from salt.log.setup import SaltLogQueueHandler, LOG_LEVELS
     queue = Queue(queue_size)
     handler = SaltLogQueueHandler(queue)
     level = LOG_LEVELS[(__opts__.get('pytest_log_level') or 'error').lower()]
