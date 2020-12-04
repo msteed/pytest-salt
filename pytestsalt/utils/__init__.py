@@ -27,7 +27,6 @@ from collections import namedtuple
 from tblib import pickling_support
 pickling_support.install()
 
-import pickle, sys
 # Import 3rd party libs
 import pytest
 import psutil

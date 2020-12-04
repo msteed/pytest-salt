@@ -33,8 +33,8 @@ except ImportError:
     is_darwin = salt.utils.is_darwin
 # pylint: enable=no-member,invalid-name
 
-#from tblib import pickling_support
-#pickling_support.install()
+from tblib import pickling_support
+pickling_support.install()
 
 __virtualname__ = 'pytest_log_handler'
 
